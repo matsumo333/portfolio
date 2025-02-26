@@ -1,0 +1,225 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+@import "../styles/button";
+
+/* Navbar全体のスタイル */
+
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  height: 50px;
+  position: relative;
+  border-radius: 0;
+  background-color: $navbar-color2;
+}
+
+/* サークル名のスタイル */
+.circleName {
+  position: absolute;
+  top: 10px;
+  font-size: 20px;
+  margin-left: 16px;
+  color: white;
+  transform: skew(-7deg);
+  @include title-green;
+}
+
+/* メニューアイコンのスタイル */
+.menu-icon {
+  position: absolute;
+  right: 15px;
+  top: 9.2px;
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* ナビゲーションリンクのスタイル */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin-left: auto;
+  // transform: skew(-7deg);
+}
+
+/* リンクのスタイル */
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.1s;
+  display: inline-block;
+  transform: skewx(-7deg);
+}
+
+.nav-links a:hover {
+  color: cadetblue;
+  cursor: pointer;
+  font-size: 1.15em;
+}
+
+/* アカウント名のスタイル */
+.nav-links li.account-name {
+  color: white;
+  transform: skew(-7deg);
+}
+
+@media (max-width: 876px) {
+  .menu-icon {
+    display: block;
+    margin-left: auto;
+    color: white;
+    // transform: skew(-7deg);
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 140px;
+    background-color: #49d42d;
+    gap: 15px;
+    padding: 10px 0;
+    text-align: right;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: block;
+    align-items: start;
+    text-align: center;
+  }
+
+  .nav-links a {
+    padding: 10px;
+    text-align: center !important;
+    margin: 0;
+  }
+
+  li {
+    padding: 8px;
+    transform: skewx(-7deg);
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.account-name {
+  background-color: white;
+  color: $base-color2;
+  font-size: 16px;
+  padding: 0 8px;
+  margin: 0 15px 0 20px;
+  border-radius: 3px;
+  text-decoration: none;
+  transform: skewX(-7deg);
+}
+
+.account-name.logged-out {
+  background-color: red;
+  color: white;
+  animation: blink 5s infinite;
+}
+.account-name:active,
+.account-name:focus {
+  color: white !important;
+  background-color: rgb(25, 41, 213) !important;
+  outline: none;
+}
+
+@media (max-width: 876px) {
+  .account-name {
+    display: none;
+  }
+}
+.account-name1 {
+  display: none;
+  background-color: white;
+  color: $base-color2;
+  font-size: 18px;
+  padding: 0 10px;
+  margin: 0 20px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.account-name1.showAfterDelay {
+  display: flex;
+  background-color: white;
+  color: $base-color2;
+}
+
+.account-name1.logged-out {
+  background-color: red;
+  color: white;
+  animation: blink 2s infinite;
+}
+
+.account-name1:active,
+.account-name1:focus {
+  color: white !important;
+  background-color: rgb(25, 41, 213) !important;
+  outline: none;
+}
+
+@media (max-width: 876px) {
+  .account-name1 {
+    display: flex;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.navbar-accountname {
+  display: inline-block;
+  transform: skew(-7deg);
+}
+
+.navbar_accunt_name_narrow {
+  position: absolute;
+  // background-color: white;
+  color: white;
+  top: 13.8px;
+  display: none;
+  right: 70px;
+  padding: 0 10px;
+  border: 1px solid white;
+  border-radius: 3px;
+  transform: skew(-7deg);
+  &:hover {
+    background-color: $base-color;
+    transform: translateY(1px) translateX(1px) skewX(-9deg);
+    transition: all 0.3s ease;
+  }
+  @media (max-width: 876px) {
+    display: block;
+  }
+}

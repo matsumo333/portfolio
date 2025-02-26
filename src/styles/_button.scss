@@ -1,0 +1,13 @@
+@import "variables";
+@import "mixins";
+
+.submit_button {
+  // クラスセレクタを使用
+  background-color: $base-color2;
+  @include box-shadow; // box-shadow ミックスインの呼び出し
+}
+
+$cancel-color: #e54646;
+$button-color: #283df7;
+$edit-color: #8561aa;
+$button-hover-color: rgb(50, 201, 78);

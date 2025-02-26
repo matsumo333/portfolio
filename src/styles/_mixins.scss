@@ -1,0 +1,130 @@
+//mixins.scss
+@import "variables";
+
+@mixin submit-button {
+  background-color: $base-color2;
+  color: white;
+  padding: 4px 10px 1px;
+  width: 200px;
+  margin: 8px 0 10px;
+  font-size: 20px;
+  height: 40px;
+  border-radius: 5px;
+  transform: skewX(-7deg);
+  @include box-shadow;
+  cursor: pointer;
+  @media (max-width: 576px) {
+    font-size: 14px;
+    width: 150px;
+    height: 28px;
+    margin: 0;
+    margin-right: 10px !important;
+    @include box-shadow3;
+  }
+}
+
+@mixin box-shadow(
+  $color: black,
+  $offset-x: 12px,
+  $offset-y: 12px,
+  $blur: 8px,
+  $spread: -5px
+) {
+  box-shadow: $offset-x $offset-y $blur $spread $color;
+}
+@mixin box-shadow2(
+  $color: black,
+  $offset-x: 8px,
+  $offset-y: 8px,
+  $blur: 8px,
+  $spread: -5px
+) {
+  box-shadow: $offset-x $offset-y $blur $spread $color;
+}
+@mixin box-shadow3(
+  $color: black,
+  $offset-x: 4px,
+  $offset-y: 4px,
+  $blur: 4px,
+  $spread: -3px
+) {
+  box-shadow: $offset-x $offset-y $blur $spread $color;
+}
+@mixin box-shadow3(
+  $color: black,
+  $offset-x: 2px,
+  $offset-y: 2px,
+  $blur: 2px,
+  $spread: -2px
+) {
+  box-shadow: $offset-x $offset-y $blur $spread $color;
+}
+
+@mixin center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin responsive-font-size($default-size, $media-size) {
+  font-size: $default-size;
+
+  @media (max-width: 576px) {
+    font-size: $media-size;
+  }
+}
+
+@mixin grid-area($area) {
+  grid-area: $area;
+}
+
+@mixin box-style(
+  $padding: 10px,
+  $margin: 1px,
+  $font-size: 22px,
+  $font-weight: 600
+) {
+  padding: $padding;
+  margin: $margin;
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin form-item-style {
+  font-size: 24px !important;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  @include center-flex;
+  padding-top: 15px;
+
+  @media (max-width: 576px) {
+    font-size: 22px !important;
+    min-width: 10px 0 !important;
+  }
+}
+
+@mixin label-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px !important;
+  background-color: burlywood;
+  @media (max-width: 576px) {
+    font-size: 28px;
+    min-width: 80px !important;
+  }
+}
+
+@mixin title-blue {
+  text-shadow: 1px 1px 2px rgb(43, 43, 149), 0 0 1em rgb(144, 144, 217),
+    0 0 0.2em rgb(144, 144, 213);
+}
+@mixin title-white {
+  text-shadow: 1px 1px 2px rgb(43, 43, 149), 0 0 1em rgb(144, 144, 217),
+    0 0 0.2em rgb(144, 144, 213);
+}
+@mixin title-green {
+  text-shadow: 1px 1px 2px rgb(140, 236, 159), 0 0 1em rgb(144, 144, 217),
+    0 0 0.2em rgb(144, 144, 213);
+}
