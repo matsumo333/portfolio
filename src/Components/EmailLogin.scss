@@ -1,0 +1,260 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.email-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  @media (max-width: 576px) {
+  }
+}
+
+.email-login-content {
+  box-sizing: 20pxs;
+  // background-color: $base-color2;
+  transition: 200ms;
+  border-radius: 5px;
+
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  @media (max-width: 576px) {
+    border-radius: 3px;
+  }
+}
+
+.email-login-field p {
+  color: white;
+  margin: 2px 12px 2px;
+  font-size: 22px;
+  font-weight: 400;
+  transform: skew(-7deg);
+  @media (max-width: 576px) {
+    font-size: 16px; /* 小さい画面の場合はフォントサイズを小さく */
+    padding: 2px;
+    margin: 0 12px 3px;
+  }
+}
+.email-login-form {
+  margin: 0;
+  width: 100%;
+  border: none;
+  margin-top: 10px;
+  position: relative;
+
+  @media (max-width: 576px) {
+    font-size: 18px !important; /* 小さい画面の場合はフォントサイズを小さく */
+  }
+}
+.email-login-field,
+.email-login-field2 {
+  @include box-shadow;
+  margin: 10px auto 15px;
+  background-color: $base-color2;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  padding: 5px 0;
+  position: relative;
+  border-radius: 5px;
+  @media (max-width: 576px) {
+    margin: 10px 3px;
+    padding: 10px 0 5px;
+  }
+}
+
+.email-login-field2 {
+  align-items: flex-start;
+}
+.email-login-close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: white;
+
+  border-radius: 50%; // 円形のボタン
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 28px; // テキストを中央に配置
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; // トランジションを追加
+  z-index: 10;
+  &:hover {
+    background-color: $base-color;
+    color: white;
+  }
+
+  @media (max-width: 576px) {
+    top: 6px;
+    font-size: 16px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+.email-login-email-input,
+.email-login-password-input {
+  background-color: white;
+  color: $base-color2;
+  border: none;
+  border-radius: 5px;
+  font-size: 22px;
+  padding: 8px;
+  box-sizing: border-box;
+  transform: skew(-7deg);
+  transition: border-color 0.3s ease;
+  margin: 5px 20px 10px !important;
+  &:focus {
+    border-color: darken($base-color, 10%);
+    outline: none;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 16px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin: 0;
+    margin: 5px 10px 10px !important;
+  }
+}
+
+.email-login-button {
+  background-color: $base-color;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 8px; // 角を丸くする
+  padding: 2px 8px;
+  font-size: 22px;
+  font-weight: 400;
+  cursor: pointer;
+  transform: skew(-7deg);
+  @include box-shadow;
+  transition: background-color 0.3s ease, transform 0.2s ease; // トランジションを追加
+  margin: 5px auto;
+  width: 300px;
+  &:hover {
+    background-color: $base-color2;
+    background-color: $cation-color;
+    transform: skewX(-7deg);
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  @media (max-width: 576px) {
+    font-size: 14px;
+    padding: 3px 10px;
+    width: 200px;
+    margin: 5px auto 10px;
+  }
+}
+
+.email-login-forget {
+  margin: 0 !important;
+}
+
+.email-login-forget-button,
+.email-login-emailadress-change-button {
+  text-align: center;
+  border: none;
+  border-radius: 8px; // 角を丸くする
+  padding: 8px 20px 6px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transform: skew(-7deg);
+  margin: 15px 20px 10px !important;
+  color: white;
+  background-color: $base-color;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  @include box-shadow;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: $base-color2;
+    transform: skewX(-7deg);
+  }
+
+  &:active {
+    transform: skewX(-7deg);
+  }
+
+  /* 常に表示されるオーバーレイ */
+  &::before {
+    content: ""; /* 擬似要素を有効にする */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 0; /* ボタンの背景に配置 */
+  }
+
+  @media (max-width: 576px) {
+    margin: 10px 15px !important;
+    font-size: 14px;
+    padding: 3px 10px;
+  }
+}
+
+.email-login-toggle-password-button {
+  font-size: 14px !important; // フォントサイズを調整
+  margin: 4px 0 10px !important;
+  margin-right: 20px !important;
+  width: 100px;
+  background-color: $base-color !important;
+  color: white !important;
+  border: none;
+  border-radius: 8px; // 角を丸くする
+  padding: 5px 10px;
+  transform: skew(-7deg);
+  cursor: pointer;
+  @include box-shadow;
+  transition: background-color 0.3s ease; // トランジションを追加
+  margin-left: auto !important;
+  &:hover {
+    background-color: $cation-color;
+    transform: skewX(-7deg);
+  }
+
+  @media (max-width: 576px) {
+    font-size: 8px !important;
+    margin: 0 10px 8px !important;
+    margin-left: auto !important;
+    width: 50px;
+  }
+}
+
+.email-login-error-message p {
+  background-color: $cation-color;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  padding: 20px;
+  border-radius: 5px;
+  color: rgb(197, 64, 28);
+  transform: skew(-7deg);
+  @media (max-width: 576px) {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

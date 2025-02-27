@@ -5,6 +5,7 @@ import "./Navbar.scss";
 const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
   const navigate = useNavigate();
+  const isAuth = localStorage.getItem("isAuth");
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
@@ -58,6 +59,15 @@ const Navbar = () => {
         <li onClick={closeMenu}>
           <Link to="/home">ホーム</Link>
         </li>
+        {!isAuth ? (
+          <li>
+            <Link to="/login">ログイン</Link>
+          </li>
+        ) : (
+          <li>
+            <Link to="/logout">ログアウト</Link>
+          </li>
+        )}
 
         <li onClick={closeMenu}>
           <Link to="/links">リンク</Link>

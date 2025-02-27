@@ -13,23 +13,23 @@ const VbaCreate = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   return (
-    <div className="videoproduct-container">
+    <div className="vbacreate-container">
       <video
         autoPlay
         loop
         muted
-        className="videoproduct-container-background-video"
+        className="vbacreate-container-background-video"
       >
         <source src="/videos/background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="videoproduct-content">
+      <div className="vbacreate-content">
         {" "}
-        <div className="videoproduct-title">
+        <div className="vbacreate-title">
           {slide &&
             slide.split("").map((char, charIndex) => (
               <span
-                className={`videoproduct-title-char ${
+                className={`vbacreate-title-char ${
                   char === " " ? "whitespace" : ""
                 }`}
                 style={{ "--char-index": charIndex }}
@@ -39,55 +39,55 @@ const VbaCreate = () => {
               </span>
             ))}
         </div>
-        <div className="videoproduct-box">
+        <div className="vbacreate-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="vbacreate-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="vbacreate-overlay">
             <p>ぼかしています</p>
           </div>
         </div>
-        <div className="videoproduct-box">
+        <div className="vbacreate-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="vbacreate-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="vbacreate-overlay">
             <p>ぼかしています</p>
           </div>
         </div>
-        <div className="videoproduct-box">
+        <div className="vbacreate-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="vbacreate-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="vbacreate-overlay">
             <p>ぼかしています</p>
           </div>
         </div>
-        <div className="videoproduct-box">
+        <div className="vbacreate-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="vbacreate-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="vbacreate-overlay">
             <p>ぼかしています</p>
           </div>
         </div>

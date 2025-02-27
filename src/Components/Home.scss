@@ -45,6 +45,7 @@
       font-size: 28px;
       margin: 7px 12px 5px;
       transform: skewX(-7deg);
+      border-radius: 3px;
       padding: 2px 24px 10px 21px;
       border-left: 8px solid $base-color2;
       border-bottom: 1px solid $base-color2;
@@ -70,9 +71,11 @@
 
     p {
       color: $base-color2;
-      font-size: 22px;
+      font-size: 20px;
+      font-weight: 600;
       transform: skewX(-3deg);
       padding-left: 0px;
+      line-height: 1.4;
     }
 
     /* clearfix */

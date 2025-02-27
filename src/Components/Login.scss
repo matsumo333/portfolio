@@ -1,0 +1,88 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.container-login {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  justify-content: center;
+  margin: 15px auto; /* Center horizontally and add top margin */
+
+  @media (max-width: 576px) {
+    margin-top: 20px; /* Reduce top margin for smaller screens */
+  }
+}
+
+.container-login .content {
+  width: 90%;
+  border-color: $base-color2;
+
+  background-color: $base-color2;
+  transition: 200ms;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px 0 0;
+  p {
+    width: 100%;
+    text-align: center;
+    margin: 15px 0 10px;
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+    transform: skew(-7deg);
+    @media (max-width: 576px) {
+      font-size: 18px; /* Smaller font size for smaller screens */
+      margin-top: 5px !important;
+    }
+  }
+
+  .login-button {
+    background-color: white !important;
+    color: $base-color2;
+    width: 90%;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    transform: skew(-7deg);
+    @include box-shadow;
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 10px !important;
+    padding: 2px 5px !important;
+
+    &:hover {
+      background-color: $base-color2;
+      color: $base-color;
+      cursor: pointer;
+      font-size: 25px;
+    }
+
+    &:active {
+      transform: translateY(3px) translateX(3px);
+      transition-duration: 100ms;
+    }
+    @media (max-width: 576px) {
+      font-size: 14px !important; /* Smaller font size for smaller screens */
+      font-weight: 400;
+      width: 60% !important; /* Full width for smaller screens */
+      margin: 0 0 10px 0 !important;
+      &:hover {
+        background-color: $base-color2;
+        color: $base-color;
+        cursor: pointer;
+        font-size: 19px;
+      }
+
+      &:active {
+        transform: translateY(3px) translateX(3px);
+        transition-duration: 100ms;
+      }
+    }
+  }
+}

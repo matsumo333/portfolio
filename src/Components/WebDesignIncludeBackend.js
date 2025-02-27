@@ -13,24 +13,24 @@ const WebDesignIncludeBackend = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   return (
-    <div className="videoproduct-container">
+    <div className="webdesign-container">
       <_backgroundStyles slides={slides} setCurrentSlide={setCurrentSlide} />
       {/* <video
         autoPlay
         loop
         muted
-        className="videoproduct-container-background-video"
+        className="webdesign-container-background-video"
       >
         <source src="/videos/background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video> */}
-      <div className="videoproduct-content">
+      <div className="webdesign-content">
         {" "}
-        <div className="videoproduct-title">
+        <div className="webdesign-title">
           {slide &&
             slide.split("").map((char, charIndex) => (
               <span
-                className={`videoproduct-title-char ${
+                className={`webdesign-title-char ${
                   char === " " ? "whitespace" : ""
                 }`}
                 style={{ "--char-index": charIndex }}
@@ -40,55 +40,55 @@ const WebDesignIncludeBackend = () => {
               </span>
             ))}
         </div>
-        <div className="videoproduct-box">
+        <div className="webdesign-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="webdesign-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="webdesign-overlay">
             <p>ぼかしています</p>
           </div>
         </div>
-        <div className="videoproduct-box">
+        <div className="webdesign-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="webdesign-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="webdesign-overlay">
             <p>ぼかしています</p>
           </div>
         </div>
-        <div className="videoproduct-box">
+        <div className="webdesign-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="webdesign-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="webdesign-overlay">
             <p>ぼかしています</p>
           </div>
         </div>
-        <div className="videoproduct-box">
+        <div className="webdesign-box">
           {/* 画像 */}
           <img
             src="/images/img2.jpg"
-            className="videoproduct-box-image"
+            className="webdesign-box-image"
             alt="背景画像"
           />
 
           {/* テキストを重ねる */}
-          <div className="videoproduct-overlay">
+          <div className="webdesign-overlay">
             <p>ぼかしています</p>
           </div>
         </div>

@@ -2,23 +2,25 @@
 @import "variables";
 
 @mixin submit-button {
-  background-color: $base-color2;
+  display: flex;
+  background-color: $navbar-color2;
   color: white;
-  padding: 4px 10px 1px;
-  width: 200px;
-  margin: 8px 0 10px;
-  font-size: 20px;
-  height: 40px;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  border: 1px white solid;
   border-radius: 5px;
-  transform: skewX(-7deg);
+  margin: 5px 0;
+  height: 28px;
+  padding: 4px 15px 2px;
   @include box-shadow;
   cursor: pointer;
   @media (max-width: 576px) {
     font-size: 14px;
-    width: 150px;
-    height: 28px;
+    padding: 1px 8px 0;
     margin: 0;
-    margin-right: 10px !important;
+    height: 24px;
+    // margin-right: 10px !important;
     @include box-shadow3;
   }
 }
@@ -81,7 +83,7 @@
 @mixin box-style(
   $padding: 10px,
   $margin: 1px,
-  $font-size: 22px,
+  $font-size: 20px,
   $font-weight: 600
 ) {
   padding: $padding;
@@ -99,7 +101,7 @@
   padding-top: 15px;
 
   @media (max-width: 576px) {
-    font-size: 22px !important;
+    font-size: 20px !important;
     min-width: 10px 0 !important;
   }
 }
