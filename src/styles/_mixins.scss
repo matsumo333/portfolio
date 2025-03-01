@@ -8,16 +8,24 @@
   font-size: 18px;
   align-items: center;
   justify-content: center;
-  border: 1px white solid;
+
   border-radius: 5px;
   margin: 5px 0;
   height: 28px;
   padding: 4px 15px 2px;
   @include box-shadow;
   cursor: pointer;
-  @media (max-width: 576px) {
+  @media (max-width: 800px) {
     font-size: 14px;
     padding: 1px 8px 0;
+    margin: 0;
+    height: 24px;
+    // margin-right: 10px !important;
+    @include box-shadow3;
+  }
+  @media (max-width: 576px) {
+    font-size: 14px;
+    padding: 1px 3px 0;
     margin: 0;
     height: 24px;
     // margin-right: 10px !important;

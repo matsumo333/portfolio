@@ -25,7 +25,7 @@
   justify-content: center;
   z-index: 10;
   .home-content-item {
-    background-color: rgba(239, 244, 244, 0.99);
+    background-color: lighten($base-color2, 55%);
     // background-color: red;
     display: flex;
     flex-direction: column;
@@ -38,23 +38,32 @@
     @include box-shadow;
     transform: translateX(-100%); /* 初期位置を左に設定 */
     animation: home-slide-in-left 2s ease-out forwards;
+    @media (max-width: 576px) {
+      margin: 13px 8px 2px;
+      padding: 0 0 5px 0;
+    }
     h3 {
       background-color: $base-color2;
       color: white;
       font-weight: 400;
       font-size: 28px;
-      margin: 7px 12px 5px;
+      margin: 3px 12px 0;
       transform: skewX(-7deg);
       border-radius: 3px;
-      padding: 2px 24px 10px 21px;
+      padding: 2px 24px 2px 21px;
       border-left: 8px solid $base-color2;
       border-bottom: 1px solid $base-color2;
       border-top: 1px solid $base-color2;
       border-right: 8px solid $base-color2;
 
-      height: 40px;
+      // height: 40px;
       line-height: 1.2;
       @include box-shadow;
+      @media (max-width: 576px) {
+        margin: 5px 10px 0 15px;
+        padding: 3px 5px;
+        font-size: 18px;
+      }
     }
   }
 
@@ -62,20 +71,34 @@
     margin: 15px;
     align-items: flex-start;
     z-index: 200;
+    @media (max-width: 576px) {
+      margin: 10px 8px 0 5px;
+      padding: 0;
+    }
     .home-content-item-image {
       width: 150px;
       height: 150px;
       float: left;
       margin-right: 20px;
+      @media (max-width: 576px) {
+        margin: 0 8px 0 5px;
+        padding: 0;
+      }
     }
 
     p {
-      color: $base-color2;
+      color: darken($base-color2, 20%);
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 400;
       transform: skewX(-3deg);
       padding-left: 0px;
       line-height: 1.4;
+      @media (max-width: 576px) {
+        margin: 0 0 0 3px;
+        padding: 0;
+        font-size: 16px;
+        transform: skewX(0);
+      }
     }
 
     /* clearfix */

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import _backgroundStyles from "../styles/_backgroundStyles";
-import "./VideoProduction.scss";
+import "./CommonIntroduction.scss";
 import ReactPlayer from "react-player";
 import { Navigate, useNavigate } from "react-router-dom";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import BackgroundVideo from "./BackgroundVideo";
 
 const getYouTubeThumbnail = (url) => {
   let videoID;
@@ -21,7 +22,7 @@ const getYouTubeThumbnail = (url) => {
 };
 
 const VideoProduction = () => {
-  const componentName = VideoProduction.name.toLocaleLowerCase();
+  const componentName = "videoproduction";
   console.log(componentName);
   const slide = "動画の作成と発信（youtubeを活用)";
   const navigate = useNavigate();
@@ -82,7 +83,9 @@ const VideoProduction = () => {
     const updateColumns = () => {
       const width = window.innerWidth;
       let newColumns;
-      if (width >= 1200) {
+      if (width >= 1650) {
+        newColumns = 4;
+      } else if (width >= 1570) {
         newColumns = 3;
       } else if (width >= 650) {
         newColumns = 2;
@@ -130,9 +133,14 @@ const VideoProduction = () => {
     if (remainder === 0) return arr;
     const dummyCount = multiple - remainder;
     const dummyItems = Array(dummyCount).fill({
+      order: "",
       title: "",
-      youtubeUrl: "",
       content: "",
+      eventday: "",
+      linkUrl: "",
+      youtubeUrl: "",
+      // image: "",
+      // other: "",
       isDummy: true, // ダミーフラグ
     });
     return [...arr, ...dummyItems];
@@ -142,24 +150,33 @@ const VideoProduction = () => {
   const adjustedArray = fillDummyItems(targetDataList, columns);
   //
   return (
-    <div className="videoproduct-container">
+    <div className="commonintroduction-container">
       <video
         autoPlay
         loop
         muted
-        className="videoproduct-container-background-video"
+        className="commonintroduction-container-background-video"
       >
         <source src="/videos/background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="videoproduct-content">
+      {/* <BackgroundVideo /> */}
+      {/* <ReactPlayer
+        url="https://www.youtube.com/watch?v=jMi5QUr2AaY"
+        width="100%"
+        height="100vh"
+        controls={true}
+        playing={true}
+        muted={true}
+      /> */}
+      <div className="commonintroduction-content">
         {" "}
-        <div className="videoproduct-title">
-          <div className="videoproduct-titletext">
+        <div className="commonintroduction-title">
+          <div className="commonintroduction-titletext">
             {slide &&
               slide.split("").map((char, charIndex) => (
                 <span
-                  className={`videoproduct-title-char ${
+                  className={`commonintroduction-title-char ${
                     char === " " ? "whitespace" : ""
                   }`}
                   style={{ "--char-index": charIndex }}
@@ -170,32 +187,33 @@ const VideoProduction = () => {
               ))}
           </div>
           <div
-            className="videoproduct-post"
+            className="commonintroduction-post"
             onClick={() => {
               navigate("/firestoreservice", {
                 state: {
                   posttitle: "動画",
                   databasename: componentName,
                   targetitems: [
+                    "order",
                     "eventday",
                     "title",
                     "content",
-                    "linkUrl",
+                    // "linkUrl",
                     "youtubeUrl",
-                    "image",
-                    "other",
+                    // "image",
+                    // "other",
                   ],
                 },
               });
             }}
           >
-            <span className="videoproduct-post-text">追 加</span>
+            <span className="commonintroduction-post-text">追 加</span>
           </div>
         </div>{" "}
-        <div className="videoproduct-box-wrap">
+        <div className="commonintroduction-box-wrap">
           {adjustedArray.map((targetData, index) => (
             <div
-              className={`videoproduct-box ${
+              className={`commonintroduction-box ${
                 targetData.isDummy ? "dummy" : ""
               }`}
               key={index}
@@ -203,28 +221,49 @@ const VideoProduction = () => {
               {" "}
               {!targetData.isDummy && (
                 <>
-                  <div className="videoproduct-box-title">
-                    <p>{targetData.title}</p>
+                  <div className="commonintroduction-box-title">
+                    <span className="commonintroduction-box-title-text">
+                      {targetData.title}
+                    </span>
+                    <button
+                      onClick={() =>
+                        navigate(`/firestoreservice/${targetData.id}/edit`, {
+                          state: {
+                            posttitle: "動画",
+                            databasename: componentName,
+                            targetitems: [
+                              "order",
+                              "eventday",
+                              "title",
+                              "content",
+                              // "linkUrl",
+                              "youtubeUrl",
+                              // "image",
+                              // "other",
+                            ],
+                            targetData: targetData,
+                          },
+                        })
+                      }
+                      className="commonintroduction-box-edit-button"
+                    >
+                      ︙
+                    </button>
                   </div>
-                  <div className="videoproduct-box-youtube">
+                  <div className="commonintroduction-box-youtube">
                     <ReactPlayer
                       url={targetData.youtubeUrl}
                       width="100%"
-                      height="auto"
+                      height="100%"
                       controls={true}
                     />
                     {/* YouTube動画のタイトルを表示 */}
                   </div>
-                  <div className="videoproduct-box-content">
-                    {targetData.content}
+                  <div className="commonintroduction-box-content">
+                    <span className="commonintroduction-box-content-text">
+                      {targetData.content}
+                    </span>
                   </div>
-                  <div className="videoproduct-box-content">
-                    <img
-                      class="videoproduct-box-image"
-                      src={targetData.thumbnailUrl}
-                      alt={targetData.title}
-                    />
-                  </div>{" "}
                 </>
               )}
             </div>

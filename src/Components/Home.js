@@ -38,18 +38,18 @@ const Home = () => {
       link: `/vbacreate`,
     },
     {
-      title: "テニスエルボ治療",
+      title: "テニス等のサークル活動支援",
       content:
         "行政建築技術者者として４４年間行政建築技術者者として４４年間行政建築技術者者として４４年間行政建築技術者者として４４年間行政建築技術者者として４４年間",
       image: `./images/img2.jpg`,
       link: `/home`,
     },
     {
-      title: "その他",
+      title: "社会問題解決",
       content:
         "行政建築技術者者として４４年間行政建築技術者者として４４年間行政建築技術者者として４４年間行政建築技術者者として４４年間行政建築技術者者として４４年間",
       image: `./images/img2.jpg`,
-      link: `/home`,
+      link: `/socialefficiency`,
     },
   ];
   const slides = Array.from({ length: 19 }, (_, index) => ({

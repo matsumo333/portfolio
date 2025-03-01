@@ -9,6 +9,7 @@ import VbaCreate from "./Components/VbaCreate";
 import FirestoreService from "./Components/FirestoreService";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
+import SocialEfficiency from "./Components/SocialEfficiency";
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
         <Route path="/" element={<Entrance />} />
         <Route path="/home" element={<Home />} />
         <Route path="/firestoreservice" element={<FirestoreService />} />
+        {/* <Route path="/firestoreservice" element={<FirestoreService />} /> */}
+        <Route
+          path="/firestoreservice/:Id/:eventState"
+          element={<FirestoreService />}
+        />
 
         <Route path="/videoproduction" element={<VideoProduction />} />
         <Route path="/municipalarchitect" element={<MunicipalArchitect />} />
@@ -27,6 +33,15 @@ function App() {
         <Route
           path="/webdesignincludebackend"
           element={<WebDesignIncludeBackend />}
+        />
+        <Route
+          path="/webdesignincludebackend/:Id/:eventState"
+          element={<WebDesignIncludeBackend />}
+        />
+        <Route path="/socialefficiency" element={<SocialEfficiency />} />
+        <Route
+          path="/socialefficiency/:Id/:eventState"
+          element={<SocialEfficiency />}
         />
       </Routes>
     </Router>

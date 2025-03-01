@@ -16,11 +16,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const FirestoreService = () => {
   const [title, setTitle] = useState("");
-  const { circleId, eventState } = useParams();
+  const { Id, eventState } = useParams();
   const [content, setContent] = useState("");
   const textareaRef = useRef(null);
   const location = useLocation();
-
   const [image, setImage] = useState(null);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +33,9 @@ const FirestoreService = () => {
   const [maxDays, setMaxdays] = useState(null);
   const [daySelectShow, setDaySelectShow] = useState(true);
   const [eventdate, setEventDate] = useState("");
+
   const [targetData, setTargetData] = useState({
+    order: "",
     title: "",
     eventday: "",
     selectedYear: "2025",
@@ -55,23 +56,19 @@ const FirestoreService = () => {
   dataObjects[targetDataList] = [];
   const targetTitle = location.state.posttitle;
   const targetItems = location.state.targetitems;
-  console.log(targetItems);
-  console.log(targetDataName);
-  const Id = "12345";
+  const EditTargetData = location.state.targetData;
+  console.log(Id);
+  console.log(eventState);
+  console.log(EditTargetData);
 
   useEffect(() => {
-    if (Id && Array.isArray(dataObjects.targetDataList)) {
-      const targetDataDoc = dataObjects.targetDataList.find(
-        (circle) => circle.id === Id
-      );
-      if (targetDataDoc) {
-        setTargetData({ ...targetDataDoc });
-        setIsEditing(true);
-      } else {
-        console.log("イベントが見つかりませんでした");
-      }
+    if (Id) {
+      setTargetData({ ...EditTargetData });
+      setIsEditing(true);
+    } else {
+      console.log("イベントが見つかりませんでした");
     }
-  }, [Id, targetDataList]);
+  }, [Id, EditTargetData]);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -81,51 +78,48 @@ const FirestoreService = () => {
   }, [content]);
 
   const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      resizeImage(e.target.files[0], 800, 800, 0.7);
+    const file = e.target.files[0];
+    if (file) {
+      resizeImage(file, 800, 800, 0.7).then((resizedFile) => {
+        // リサイズ後の画像データを状態に保存
+        setImage(resizedFile);
+      });
     }
   };
 
-  const resizeImage = (file, size, quality) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (event) => {
-      const img = new Image();
-      img.src = event.target.result;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
+  const resizeImage = (file, maxWidth, maxHeight, quality) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
 
-        const minSize = Math.min(img.width, img.height);
-        const offsetX = (img.width - minSize) / 2;
-        const offsetY = (img.height - minSize) / 2;
-        canvas.width = size;
-        canvas.height = size;
-        ctx.drawImage(
-          img,
-          offsetX,
-          offsetY,
-          minSize,
-          minSize, // 元画像のクロップ領域
-          0,
-          0,
-          size,
-          size // キャンバスにリサイズ描画
-        );
+          // 画像の縦横比を計算
+          const ratio = Math.min(maxWidth / img.width, maxHeight / img.height);
+          canvas.width = img.width * ratio;
+          canvas.height = img.height * ratio;
 
-        // JPEG圧縮（0.7〜0.8の品質が推奨）
-        canvas.toBlob(
-          (blob) => {
-            if (blob.size > 100 * 1024) {
-              console.warn("圧縮後も100KB以下にならなかった");
-            }
-            setImage(blob);
-          },
-          "image/jpeg",
-          quality
-        );
+          // リサイズした画像をcanvasに描画
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          // リサイズ後の画像をBlobとして取得
+          canvas.toBlob(
+            (blob) => {
+              const resizedFile = new File([blob], file.name, {
+                type: file.type,
+              });
+              resolve(resizedFile); // リサイズされたファイルを返す
+            },
+            file.type,
+            quality
+          );
+        };
       };
-    };
+      reader.readAsDataURL(file);
+    });
   };
 
   const NoDaySetting = () => {
@@ -230,24 +224,35 @@ const FirestoreService = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let imageUrl = "";
+    if (loading) return;
+    setLoading(true);
+
+    let imageUrl = targetData.image;
+
     if (image) {
       const storageRef = ref(storage, `blog-images/${Date.now()}.jpg`);
       const uploadTask = uploadBytesResumable(storageRef, image);
-      await new Promise((resolve, reject) => {
-        uploadTask.on(
-          "state_changed",
-          null,
-          (error) => {
-            console.error(error);
-            reject(error);
-          },
-          async () => {
-            imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
-            resolve();
-          }
-        );
-      });
+
+      try {
+        await new Promise((resolve, reject) => {
+          uploadTask.on(
+            "state_changed",
+            null,
+            (error) => {
+              console.error("アップロードエラー:", error);
+              reject(error);
+            },
+            async () => {
+              imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+              console.log("画像URL取得成功:", imageUrl); // 確認用ログ
+              resolve();
+            }
+          );
+        });
+      } catch (error) {
+        console.error("画像のアップロードに失敗しました:", error);
+        return;
+      }
     }
 
     let eventdate = new Date(
@@ -258,9 +263,10 @@ const FirestoreService = () => {
     let eventdatestring = `${targetData.selectedYear}年${targetData.selectedMonth}月${targetData.selectedDay}日`;
 
     if (eventState === undefined) {
-      console.log(eventdate);
+      console.log("新規データ追加:", eventdate);
       await addDoc(collection(db, targetDataName), {
         ...targetData,
+        image: imageUrl, // 🔹 ここで imageUrl を保存する
         eventdate,
         eventdatestring,
         created_at: serverTimestamp(),
@@ -275,16 +281,28 @@ const FirestoreService = () => {
         );
         const updatedData = {
           ...targetData,
+          image: imageUrl, // 🔹 ここで imageUrl を更新
           eventdate,
           updated_at: new Date().toISOString(),
         };
 
-        await updateDoc(doc(db, targetDataName, circleId), updatedData);
+        await updateDoc(doc(db, targetDataName, Id), updatedData);
         navigate(`/${targetDataName}`);
       } catch (error) {
         console.error("更新エラー:", error);
+      } finally {
+        setLoading(false); // 投稿完了後に loading を解除
       }
     }
+  };
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      `本当に${targetData.title}を削除しますか？`
+    );
+    if (!confirmDelete) return;
+    await deleteDoc(doc(db, targetDataName, Id));
+    navigate(`/${targetDataName}`);
   };
 
   return (
@@ -297,7 +315,7 @@ const FirestoreService = () => {
             </span>
             <div
               className="createpost-close-button"
-              onClick={isEditing ? () => navigate(`/targetData`) : () => ""}
+              onClick={() => navigate(`/${targetDataName}`)}
             >
               ｘ
             </div>
@@ -305,6 +323,19 @@ const FirestoreService = () => {
           <form onSubmit={handleSubmit}>
             <div className="firestoreservice-field">
               {" "}
+              {targetItems.some((item) => item === "order") && (
+                <>
+                  <h3>表示する順番</h3>
+                  <div className="firestoreservice-field-inner2">
+                    <input
+                      type="number"
+                      name="order"
+                      value={targetData.order}
+                      onChange={handleChange}
+                    />
+                  </div>{" "}
+                </>
+              )}{" "}
               {!isEditing && (
                 <>
                   {" "}
@@ -440,6 +471,21 @@ const FirestoreService = () => {
                       onChange={handleImageChange}
                     />{" "}
                   </div>{" "}
+                  {targetData.image ? (
+                    <>
+                      <div className="firestoreservice-field-inner3">
+                        <img
+                          src={targetData.image}
+                          style={{ width: "100px" }}
+                          alt="画像の説明"
+                          className="firestoreservice-field-inner-preimage"
+                        />
+                        <p>現在の画像</p>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </>
               )}
               {targetItems.some((item) => item === "youtubeUrl") && (
@@ -492,7 +538,7 @@ const FirestoreService = () => {
                   style={{ color: "red" }}
                   onClick={(event) => {
                     event.preventDefault(); // 🚀 フォームの送信を防ぐ
-                    // handleDelete();
+                    handleDelete();
                   }}
                 >
                   "削除する"

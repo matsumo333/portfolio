@@ -21,11 +21,11 @@ const getYouTubeThumbnail = (url) => {
     : null;
 };
 
-const VbaCreate = () => {
-  const precomponentName = "VbaCreate";
+const SocialEfficiency = () => {
+  const precomponentName = "SocialEfficiency";
   const componentName = precomponentName.toLocaleLowerCase();
   console.log(componentName);
-  const slide = "VBAの作成による事務の効率化の取り組み";
+  const slide = "社会問題解決のための取り組み";
   const navigate = useNavigate();
   const [targetDataList, setTargetDataList] = useState([
     {
@@ -34,7 +34,7 @@ const VbaCreate = () => {
       content: "",
       eventday: "",
       linkUrl: "",
-      // youtubeUrl: "",
+      youtubeUrl: "",
       image: "",
       // other: "",
       isDummy: true,
@@ -139,7 +139,7 @@ const VbaCreate = () => {
     const dummyCount = multiple - remainder;
     const dummyItems = Array(dummyCount).fill({
       title: "",
-      // youtubeUrl: "",
+      youtubeUrl: "",
       content: "",
       isDummy: true, // ダミーフラグ
     });
@@ -191,7 +191,7 @@ const VbaCreate = () => {
             onClick={() => {
               navigate("/firestoreservice", {
                 state: {
-                  posttitle: "VBA関係情報",
+                  posttitle: "社会問題解決情報",
                   databasename: componentName,
                   targetitems: [
                     "order",
@@ -199,8 +199,7 @@ const VbaCreate = () => {
                     "title",
                     "content",
                     "linkUrl",
-                    // "youtubeUrl",
-
+                    "youtubeUrl",
                     "image",
                     // "other",
                   ],
@@ -230,7 +229,7 @@ const VbaCreate = () => {
                       onClick={() =>
                         navigate(`/firestoreservice/${targetData.id}/edit`, {
                           state: {
-                            posttitle: "VBA関係情報",
+                            posttitle: "社会問題解決情報",
                             databasename: componentName,
                             targetitems: [
                               "order",
@@ -238,7 +237,7 @@ const VbaCreate = () => {
                               "title",
                               "content",
                               "linkUrl",
-                              // "youtubeUrl",
+                              "youtubeUrl",
                               "image",
                               // "other",
                             ],
@@ -296,4 +295,4 @@ const VbaCreate = () => {
   );
 };
 
-export default VbaCreate;
+export default SocialEfficiency;
