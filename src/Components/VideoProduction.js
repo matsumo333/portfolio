@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import _backgroundStyles from "../styles/_backgroundStyles";
 import "./CommonIntroduction.scss";
 import ReactPlayer from "react-player";
@@ -6,6 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import BackgroundVideo from "./BackgroundVideo";
+import { MemberContext } from "../Contexts/MemberContext";
 
 const getYouTubeThumbnail = (url) => {
   let videoID;
@@ -22,6 +23,8 @@ const getYouTubeThumbnail = (url) => {
 };
 
 const VideoProduction = () => {
+  const { currentUserInfo } = useContext(MemberContext);
+  const isAdmin = currentUserInfo?.administrator === true;
   const componentName = "videoproduction";
   console.log(componentName);
   const slide = "動画の作成と発信（youtubeを活用)";
@@ -186,29 +189,31 @@ const VideoProduction = () => {
                 </span>
               ))}
           </div>
-          <div
-            className="commonintroduction-post"
-            onClick={() => {
-              navigate("/firestoreservice", {
-                state: {
-                  posttitle: "動画",
-                  databasename: componentName,
-                  targetitems: [
-                    "order",
-                    "eventday",
-                    "title",
-                    "content",
-                    // "linkUrl",
-                    "youtubeUrl",
-                    // "image",
-                    // "other",
-                  ],
-                },
-              });
-            }}
-          >
-            <span className="commonintroduction-post-text">追 加</span>
-          </div>
+          {isAdmin && (
+            <div
+              className="commonintroduction-post"
+              onClick={() => {
+                navigate("/firestoreservice", {
+                  state: {
+                    posttitle: "動画",
+                    databasename: componentName,
+                    targetitems: [
+                      "order",
+                      "eventday",
+                      "title",
+                      "content",
+                      // "linkUrl",
+                      "youtubeUrl",
+                      // "image",
+                      // "other",
+                    ],
+                  },
+                });
+              }}
+            >
+              <span className="commonintroduction-post-text">追 加</span>
+            </div>
+          )}
         </div>{" "}
         <div className="commonintroduction-box-wrap">
           {adjustedArray.map((targetData, index) => (

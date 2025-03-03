@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import _backgroundStyles from "../styles/_backgroundStyles";
 import "./CommonIntroduction.scss";
 import ReactPlayer from "react-player";
@@ -6,6 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import BackgroundVideo from "./BackgroundVideo";
+import { MemberContext } from "../Contexts/MemberContext";
 
 const getYouTubeThumbnail = (url) => {
   let videoID;
@@ -22,6 +23,8 @@ const getYouTubeThumbnail = (url) => {
 };
 
 const VbaCreate = () => {
+  const { currentUserInfo } = useContext(MemberContext);
+  const isAdmin = currentUserInfo?.administrator === true;
   const precomponentName = "VbaCreate";
   const componentName = precomponentName.toLocaleLowerCase();
   console.log(componentName);
@@ -186,30 +189,32 @@ const VbaCreate = () => {
                 </span>
               ))}
           </div>
-          <div
-            className="commonintroduction-post"
-            onClick={() => {
-              navigate("/firestoreservice", {
-                state: {
-                  posttitle: "VBA関係情報",
-                  databasename: componentName,
-                  targetitems: [
-                    "order",
-                    "eventday",
-                    "title",
-                    "content",
-                    "linkUrl",
-                    // "youtubeUrl",
+          {isAdmin && (
+            <div
+              className="commonintroduction-post"
+              onClick={() => {
+                navigate("/firestoreservice", {
+                  state: {
+                    posttitle: "VBA関係情報",
+                    databasename: componentName,
+                    targetitems: [
+                      "order",
+                      "eventday",
+                      "title",
+                      "content",
+                      "linkUrl",
+                      // "youtubeUrl",
 
-                    "image",
-                    // "other",
-                  ],
-                },
-              });
-            }}
-          >
-            <span className="commonintroduction-post-text">追 加</span>
-          </div>
+                      "image",
+                      // "other",
+                    ],
+                  },
+                });
+              }}
+            >
+              <span className="commonintroduction-post-text">追 加</span>
+            </div>
+          )}
         </div>{" "}
         <div className="commonintroduction-box-wrap">
           {adjustedArray.map((targetData, index) => (

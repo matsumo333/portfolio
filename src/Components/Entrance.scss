@@ -95,9 +95,9 @@
   }
 }
 
-.skip-button,
 .skip-button2 {
   position: absolute;
+  top: 80px; /* 少し上に移動 */
   right: 50px;
   padding: 10px 20px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -107,14 +107,16 @@
   cursor: pointer;
   font-size: 16px;
   z-index: 100;
+
+  @media (max-width: 576px) {
+    text-shadow: rgb(99, 98, 98) 5px 5px;
+    right: 20px;
+    font-size: 3vw;
+    padding: 5px 10px;
+    top: 60px; /* モバイルの場合はさらに上に */
+  }
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
   }
-}
-
-.skip-button {
-  bottom: 80px;
-}
-.skip-button2 {
-  top: 80px;
 }

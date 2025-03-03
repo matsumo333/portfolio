@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Yusei+Magic&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import "../styles/variables";
 @import "../styles/mixins";
 
@@ -13,11 +13,8 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  // background-color: $navbar-color2;
-  // background-image: url(./images/bg.jpg);
-  // background-size: cover;
-  // background-position: center;
 }
+
 ._backgroundStyles-swiper {
   width: 100%;
   height: 100%;
@@ -41,11 +38,10 @@
     opacity: 1;
   }
   33% {
-    transform: scale(1.1); // ズームイン
+    transform: scale(1.1);
     opacity: 1;
   }
   95% {
-    // transform: scale(1.1); // ズームイン
     opacity: 1;
   }
   100% {
@@ -55,31 +51,99 @@
 }
 
 ._backgroundStyles-text {
-  position: absolute;
-  bottom: 330px;
-  left: 400px;
+  display: flex;
+  flex-wrap: wrap; // 折り返しを許可
   color: white;
-  font-size: 34px;
+  font-size: 28px;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* テキストに影をつけて視認性を向上 */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  white-space: normal; // 改行を許可
+  word-wrap: break-word; // 長い単語を折り返す
+  overflow-wrap: break-word; // 追加の折り返し対策
+  text-align: center;
+  padding: 0 50px;
   z-index: 30;
+
+  ._backgroundStyles-text-char {
+    display: inline-block;
+    color: rgba(255, 250, 250, 0.92);
+    text-shadow: rgb(99, 98, 98) 5px 5px;
+    font-weight: 700;
+    font-style: italic;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slide-in-left 1s ease-out forwards;
+
+    @media (max-width: 1200px) {
+      font-size: 26px;
+    }
+    @media (max-width: 1000px) {
+      font-size: 23px;
+    }
+    @media (max-width: 800px) {
+      font-size: 20px;
+    }
+    @media (max-width: 576px) {
+      font-size: 18px;
+    }
+  }
 }
 
-._backgroundStyles-text-char {
-  display: inline-block;
-  color: rgba(255, 250, 250, 0.92);
-  text-shadow: rgb(99, 98, 98) 5px 5px;
-  font-weight: 700;
-  font-style: italic;
-  opacity: 0;
-  transform: translateX(-100%);
-  animation: slide-in-left 2s ease-out forwards;
-  animation-delay: calc(0.1s * var(--char-index));
+._backgroundStyles-text-wrap {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -33%);
+  width: 70%;
+  max-width: 100%; // 最大幅を100%にして柔軟に
+  text-align: center;
 
-  /* 画面サイズに合わせて調整 */
+  @media (max-width: 800px) {
+    width: 90%; // より小さい画面では幅を広げる
+    transform: translate(-50%, -33%);
+  }
   @media (max-width: 576px) {
+    width: 100%; // スマホではフル幅
+    padding: 20px;
+  }
+}
+
+._backgroundStyles-text {
+  display: flex;
+  // flex-direction: column;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  white-space: pre-line;
+  text-align: left;
+  padding: 0 50px;
+  z-index: 30;
+  @media (max-width: 576px) {
+    white-space: normal;
+  }
+  ._backgroundStyles-text-char {
+    display: inline-block;
+    color: rgba(255, 250, 250, 0.92);
     text-shadow: rgb(99, 98, 98) 5px 5px;
-    font-size: 6vw;
+    font-weight: 700;
+    font-style: italic;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slide-in-left 1s ease-out forwards;
+
+    @media (max-width: 1200px) {
+      font-size: 26px;
+    }
+    @media (max-width: 1000px) {
+      font-size: 23px;
+    }
+    @media (max-width: 800px) {
+      font-size: 20px;
+    }
+    @media (max-width: 576px) {
+      font-size: 18px;
+    }
   }
 }
 
@@ -106,6 +170,7 @@
   cursor: pointer;
   font-size: 16px;
   z-index: 100;
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
   }
@@ -114,6 +179,7 @@
 .skip-button {
   bottom: 80px;
 }
+
 .skip-button2 {
   top: 80px;
 }

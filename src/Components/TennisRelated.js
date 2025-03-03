@@ -22,13 +22,13 @@ const getYouTubeThumbnail = (url) => {
     : null;
 };
 
-const MunicipalArchitect = () => {
+const TennisRelated = () => {
   const { currentUserInfo } = useContext(MemberContext);
   const isAdmin = currentUserInfo?.administrator === true;
-  const precomponentName = "MunicipalArchitect";
+  const precomponentName = "TennisRelated";
   const componentName = precomponentName.toLocaleLowerCase();
   console.log(componentName);
-  const slide = "各種の建築関係の課題解決の仕組みづくり";
+  const slide = "テニス等のサークル活動支援";
   const navigate = useNavigate();
   const [targetDataList, setTargetDataList] = useState([
     {
@@ -195,7 +195,7 @@ const MunicipalArchitect = () => {
               onClick={() => {
                 navigate("/firestoreservice", {
                   state: {
-                    posttitle: "建築関係情報",
+                    posttitle: "テニス関係情報",
                     databasename: componentName,
                     targetitems: [
                       "order",
@@ -234,7 +234,7 @@ const MunicipalArchitect = () => {
                       onClick={() =>
                         navigate(`/firestoreservice/${targetData.id}/edit`, {
                           state: {
-                            posttitle: "建築関係情報",
+                            posttitle: "テニス関係情報",
                             databasename: componentName,
                             targetitems: [
                               "order",
@@ -260,11 +260,18 @@ const MunicipalArchitect = () => {
                     // onClick={() => navigate(targetData.linkUrl)}
                     onClick={() => (window.location.href = targetData.linkUrl)}
                   >
-                    <img
-                      src={targetData.image}
-                      className="commonintroduction-box-image"
-                      alt="ウェブデザインのバックエンドイメージ"
-                    />
+                    {targetData.image ? (
+                      <>
+                        {" "}
+                        <img
+                          src={targetData.image}
+                          className="commonintroduction-box-image"
+                          alt="ウェブデザインのバックエンドイメージ"
+                        />
+                      </>
+                    ) : (
+                      ""
+                    )}
 
                     <span className="commonintroduction-box-content-text">
                       {targetData.content}
@@ -293,4 +300,4 @@ const MunicipalArchitect = () => {
   );
 };
 
-export default MunicipalArchitect;
+export default TennisRelated;
