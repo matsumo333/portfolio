@@ -6,13 +6,7 @@ import { getAuth } from "firebase/auth";
 
 // Firebase の設定
 const firebaseConfig = {
-  apiKey: "AIzaSyCRnrK-yoLvx75Kzqlqj_M6j-apwoo8-3s",
-  authDomain: "kyoto-solution.firebaseapp.com",
-  projectId: "kyoto-solution",
-  storageBucket: "kyoto-solution.firebasestorage.app",
-  messagingSenderId: "26152406786",
-  appId: "1:26152406786:web:e14ba94f35b544ce613c1b",
-  measurementId: "G-GVTB64WNJQ",
+  //
 };
 
 // Firebase を初期化
